@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Yerim Harada</title>
+</head>
+<body>
+    <h2>Mənim Yerim</h2>
+    <button onclick="findMe()">Yerimi Tap</button>
+    <div id="result"></div>
+    <script>
+function findMe() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    }
+}
+function showPosition(position) {
+    document.getElementById("result").innerHTML = `
+        <p>📍 Enlem: ${position.coords.latitude}</p>
+        <p>📍 Boylam: ${position.coords.longitude}</p>
+        <p>📏 Dəqiqlik: ${position.coords.accuracy} metr</p>
+        <a href="https://maps.google.com/?q=${position.coords.latitude},${position.coords.longitude}" target="_blank">
+        🗺️ Google Maps-də bax</a>
+    `;
+}
+function showError(error) {
+    alert("GPS icazəsi lazımdır: " + error.message);
+}
+    </script>
+</body>
+</html>
